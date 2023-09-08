@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Media</title>
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		.media-item {
+    		width: 10%;
+    		margin: 10px;
+		}
+
+	</style>
+</head>
+
+<body>
+	<% for (const tag of tags) { %>
+	  	<% for (const subTag of tag.tags) { %>
+			<% if (subTag.files && subTag.files.length > 0) { %>
+		  		<% for (const file of subTag.files) { %>
+					<img class="media-item" src="public/tags/<%= tag.name %>/<%= subTag.name %>/<%= file.name %>" alt="<%= file.name %>">
+		  		<% } %>
+			<% } %>
+	  	<% } %>
+	<% } %>
+</body>
+  
+
+</html>

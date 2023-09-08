@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tags</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+		}
+
+		.tag {
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 10px;
+			margin: 10px;
+			background-color: #f5f5f5;
+		}
+
+		.file {
+			margin-left: 20px;
+			color: #555;
+		}
+
+		.folder-name {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		.folder-items {
+			margin-left: 20px;
+		}
+
+		.folder-items li {
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<% for (const tag of tags) { %>
+		<div class="tag">
+			<div class="folder-name">
+				<%= tag.name %>
+			</div>
+			<ul class="folder-items">
+				<% for (const subTag of tag.tags) { %>
+					<li>
+						<% if (subTag.tags && subTag.tags.length > 0) { %>
+							<div class="tag">
+								<div class="folder-name">
+									<%= subTag.name %>
+								</div>
+								<ul class="folder-items">
+									<% for (const nestedTag of subTag.tags) { %>
+										<li>
+											<%= nestedTag.name %>
+										</li>
+									<% } %>
+									<% for (const file of subTag.files) { %>
+										<li class="file">
+											<%= file.name %>
+										</li>
+									<% } %>
+								</ul>
+							</div>
+						<% } else { %>
+							<%= subTag.name %>
+							<% for (const file of subTag.files) { %>
+								<li class="file">
+									<%= file.name %>
+								</li>
+							<% } %>
+						<% } %>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+	<% } %>
+</body>
+
+</html>
